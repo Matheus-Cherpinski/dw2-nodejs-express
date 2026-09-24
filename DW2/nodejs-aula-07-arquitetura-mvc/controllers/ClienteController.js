@@ -7,7 +7,7 @@ const router = express.Router()
 
 
 // ROTA DE CLIENTES
-router.get("/clientes", (req, res) => {
+router.get("/cliente", (req, res) => {
   const clientes = [
     { nome: "Diego Max", cpf: "999.999.999-99" },
     { nome: "Gregory Souza", cpf: "888.888.888-88" },

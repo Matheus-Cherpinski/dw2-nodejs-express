@@ -12,6 +12,10 @@ import ClienteController from "./Controllers/ClienteController.js"
 import ProdutosController from "./Controllers/ProdutosController.js"
 //Importando o Controller de produto
 import PedidosController from "./Controllers/PedidosController.js"
+//Importando os Models
+import Cliente from "./models/Cliente.js"
+import Pedidos from "./models/Pedidos.js"
+import Produtos from "./models/Produtos.js"
 // Define o EJS como Renderizador de páginas
 app.set('view engine', 'ejs')
 // Define o uso da pasta "public" para uso de arquivos estáticos
@@ -24,6 +28,13 @@ connection.authenticate().then(() =>{
 }).catch((error) => {
     console.log (`Ocorreu um erro ao se conectar com o banco de dados. Erro: ${error}`);
 });
+//Criando o banco de dados se ele não existir
+const DB_NAME = "loja";
+connection.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME};`).then(() => {
+    console.log(`O banco de dados ${DB_NAME} está criado!`)
+}).catch((error) => {
+    console.log(`Ocorreu um erro ao criar o banco de dados. Erro: ${error}`);
+})
 // ROTA PRINCIPAL
 app.get("/",function(req,res){
     res.render("index")

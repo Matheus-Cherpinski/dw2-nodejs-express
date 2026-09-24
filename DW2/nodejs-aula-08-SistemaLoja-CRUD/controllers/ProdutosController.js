@@ -2,7 +2,7 @@
 
 //Importando o framework Express
 import express from "express"
-
+import Produtos from "../models/Produtos.js"
 //Router: método do Express para criar rotas
 const router = express.Router()
 
@@ -10,15 +10,12 @@ const router = express.Router()
 
 // ROTA PRODUTOS
 router.get("/produtos",function(req,res){
-    const produtos = [
-        {nome: "Celular Motorola E22", preco: 1200, categoria: "Eletroportáteis"},
-        {nome: "Tablet Samsung", preco: 900, categoria: "Eletrônicos"},
-        {nome: "Notebook Lenovo", preco: 3200, categoria: "Computadores"},
-        {nome: "Fone Bluetooth", preco: 150, categoria: "Periféricos"}
-    ]
+     Produtos.findAll().then(produtos => {
     res.render("produtos", {
         produtos: produtos
     })
-
+}).catch(error => {
+    console.log(`Ocorreu um erro ao analisar os prosutos. Erro $`)
+})
 })
 export default router;
