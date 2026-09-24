@@ -16,10 +16,6 @@ import PedidosController from "./Controllers/PedidosController.js"
 import Cliente from "./models/Cliente.js"
 import Pedidos from "./models/Pedidos.js"
 import Produtos from "./models/Produtos.js"
-
-//Condigurações do express
-//Configurando o express para permitir dados através de formulários
-app.use(express.urlencoded({ extended: false}));
 // Define o EJS como Renderizador de páginas
 app.set('view engine', 'ejs')
 // Define o uso da pasta "public" para uso de arquivos estáticos

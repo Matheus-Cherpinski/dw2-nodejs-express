@@ -22,4 +22,25 @@ router.get("/clientes",function(req,res){
 
     
 })
+
+//rota de cdastro de clientes
+router.post("/clientes/cadastrar", (req, res) => {
+    //capturando os dados vindo do formulario e gravando as variaveis
+    const nome = req.body.nome
+    const cpf = req.body.cpf
+    const endereco = req.body.endereco
+    //Chamando os models para gravar os dados no banco
+    //Equivalente ao INSERT INTO
+    Cliente.create({
+        //Nome da coluna / variavel
+        nome : nome,
+        cpf: cpf,
+        endereco : endereco
+    }).then (() => {
+        res.redirect("/clientes")
+    }).catch(error => {
+        console.log(`Ocorreu em erro ao cadastrar o cliente.
+            Erro: ${error}`)
+    });
+})
 export default router;
