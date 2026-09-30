@@ -8,9 +8,9 @@
     <div class="card-body">
         <!-- Action: para onde os dados serão enviados -->
          <!-- method='POST': método http que envia dados de forma oculta -->
-        <form action="/cliente/cadastrar" method="POST">
+        <form action="/clientes/cadastrar" method="POST">
             <label for="nome">Nome cliente:</label>
-            <input type="text" id="nome"
+            <input type="text" id="nome" name="nome"
             placeholder="Insira o nome do cliente"
             class="form-control" required>
 
@@ -20,7 +20,7 @@
             class="form-control" required>
 
             <label for="endereco">Endereço do cliente:</label>
-            <input type="text" id="endereco" nome="endereco"
+            <input type="text" id="endereco" name="endereco"
             placeholder="Insira o endereco do cliente"
             class="form-control" required>
             <br>
@@ -46,6 +46,8 @@
                                 <th>Nome:</th>
                                 <th>CPF:</th>
                                 <th>Endereço:</th>
+                                <!-- Nova coluna de ações -->
+                                 <th style="text-align: center;" colspan="2">Ações:</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,6 +63,12 @@
                                     <td>
                                         <%= cliente.endereco %>
                                     </td>
+                                    <!-- Botão de editar -->
+                                     <td>
+                                        <a class="btn btn-warning" href="/clientes/editar/<%= cliente.id %>">Editar</a>
+                                        <!-- Botão de excluir -->
+                                         <a class="btn btn-danger" href="/clientes/excluir/<%= cliente.id %>" onclick="return confirm('Deseja mesmo excluir o cliente <%= cliente.nome %>')">Excluir</a>
+                                     </td>
                                 </tr>
                                 <% }) %>
                         </tbody>

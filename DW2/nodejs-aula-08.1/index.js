@@ -7,11 +7,11 @@ import connection from "./config/sequelize-config.js";
 const app = express() 
 
 //Importando o Controller de produto
-import ClienteController from "./Controllers/ClienteController.js"
+import ClienteController from "./controllers/ClientesController.js"
 //Importando o Controller de produto
-import ProdutosController from "./Controllers/ProdutosController.js"
+import ProdutosController from "./controllers/ProdutosController.js"
 //Importando o Controller de produto
-import PedidosController from "./Controllers/PedidosController.js"
+import PedidosController from "./controllers/PedidosController.js"
 //Importando os Models
 import Cliente from "./models/Cliente.js"
 import Pedidos from "./models/Pedidos.js"
@@ -20,6 +20,8 @@ import Produtos from "./models/Produtos.js"
 app.set('view engine', 'ejs')
 // Define o uso da pasta "public" para uso de arquivos estáticos
 app.use(express.static('public'))
+// configurando express para aceitar dado de formulario
+app.use(express.urlencoded({extended:false}))
 
 //Realizando A conexão com o banco de dados
 connection.authenticate().then(() =>{

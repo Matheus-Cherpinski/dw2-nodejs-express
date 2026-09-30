@@ -24,7 +24,7 @@ router.get("/clientes",function(req,res){
 })
 
 //rota de cdastro de clientes
-router.post("/clientes/cadastrar", (req, res) => {
+router.post("/cliente/cadastrar", (req, res) => {
     //capturando os dados vindo do formulario e gravando as variaveis
     const nome = req.body.nome
     const cpf = req.body.cpf
