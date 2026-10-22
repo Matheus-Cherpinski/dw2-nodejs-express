@@ -6,6 +6,10 @@ import connection from "./config/sequelize-config.js";
 // Iniciando o Express 
 const app = express() 
 
+//Importando o express-session
+import session from "express-session";
+//Importando o middleware de Autenticação
+import Auth from "./middlewares/Auth.js";
 //Importando o Controller de cliente
 import ClienteController from "./controllers/ClientesController.js"
 //Importando o Controller de produto
@@ -18,9 +22,16 @@ import UsuariosController from "./controllers/UsuariosController.js"
 import Cliente from "./models/Cliente.js"
 import Pedidos from "./models/Pedidos.js"
 import Produtos from "./models/Produtos.js"
-
 //Importando as ASSOCIAÇÕES
 import defineAssociations from "./config/associations.js";
+
+//Configurando a Sessão de usuario
+app.use(session({
+    secret: "segredoloja",
+    cookie: {maxAge: 3600000}, //Sessão expira em 1 hora
+    saveUninitialized: false,
+    resave: false
+}));
 // Define o EJS como Renderizador de páginas
 app.set('view engine', 'ejs')
 // Define o uso da pasta "public" para uso de arquivos estáticos
@@ -57,9 +68,9 @@ Pedidos.sync({force: false})
     console.log("Erro ao sincronizar as tabelas. Erro: " + error);
 });
 // ROTA PRINCIPAL
-app.get("/",function(req,res){
+app.get("/",Auth, (req,res) =>{
     res.render("index")
-})
+});
 
 //Inicilizando as rotas de Produto
 app.use("/", ProdutosController)

@@ -1,12 +1,16 @@
 //Importando o framework Express
 import express from "express";
 import Pedidos from "../models/Pedidos.js";
+
+//Importando o middleware de Autenticação
+import Auth from "../middlewares/Auth.js";
+
 //Router: método do Express para criar rotas
 const router = express.Router();
 //Importando o Model de cliente
 import Cliente from "../models/Cliente.js";
 // ROTA PEDIDOS
-router.get("/pedidos", function (req, res) {
+router.get("/pedidos", Auth,  (req, res) => {
   Promise.all([ 
     // Listando todos os Pedidos
   Pedidos.findAll({
@@ -33,7 +37,7 @@ router.get("/pedidos", function (req, res) {
 });
 
 //Rota de cadastro de pedidos
-router.post("/pedidos/cadastrar", (req,res) => {
+router.post("/pedidos/cadastrar", Auth, (req,res) => {
   //capturando os dados do dormulario
   const numero = req.body.numero;
   const valor = req.body.valor;

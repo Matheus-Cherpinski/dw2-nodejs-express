@@ -13,5 +13,18 @@
             <a class="nav-link" href="/pedidos">Pedidos</a>
         </li>
     </ul>
+
+    <!-- Botão de entrar e sair (Login/Logout) -->
+     <spam style="margin-left: auto;">
+        <ul class="navbar-nav p-4">
+            <li class="nav-item">
+                <% if (typeof loggedOut === "undefined") { %>
+                    <a class="nav-link" href="/logout"> Fazer logout</a>
+                    <% } else  { %>
+                    <a class="nav-link" href="/login"> Fazer login</a>
+                    <% } %>
+            </li>
+        </ul>
+     </spam>
 </nav>
 <br>

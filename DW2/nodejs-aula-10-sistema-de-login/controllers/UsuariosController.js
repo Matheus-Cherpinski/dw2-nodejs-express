@@ -9,9 +9,17 @@ import { where } from "sequelize";
 
 //Rota De Login
 router.get("/login", (req,res) => {
-    res.render("login");
+    res.render("login", {
+    loggedOut: true,
 });
-
+});
+//Rota de Logout
+router.get("/logout", (req, res) => {
+    //Limpa a sessão
+    req.session.user = undefined;
+    //Redireciona para a home
+    res.redirect("/")
+})
 //Rota de autenticação
 router.post("/autenticar", (req, res) => {
     //Coletando os dados do formulário
@@ -28,6 +36,17 @@ router.post("/autenticar", (req, res) => {
 
             //Se a senha for válida
             if(senhaCorreta) {
+                //Autoriza o login e cria aa sessão para o usuario
+                req.session.user = {
+                    id: usuario.id,
+                    email: usuario.email
+                }
+                // Testando a função
+                // res.send(`Usuário logado: <br>
+                //     ID: ${req.session.user['id']} <br>
+                //     E-mail: ${req.session.user['email']}`)
+
+                //Vai redirecionar para a home após o login
                 res.redirect("/");
                 //Se a senha ofr inválida
             }else {
@@ -46,7 +65,9 @@ router.post("/autenticar", (req, res) => {
 
 // rota de cadastro
 router.get("/cadastro", (req,res) => {
-    res.render("cadastro");
+    res.render("cadastro", {
+        loggedOut: true
+    });
 });
 
 router.post("/cadastro/novo", (req, res) =>  {
